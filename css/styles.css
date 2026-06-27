@@ -1,0 +1,337 @@
+/* =============================================================
+   Expense & Budget Visualizer — Styles
+   Structure:
+     1. CSS Custom Properties (variables)
+     2. Reset / Base
+     3. Layout
+     4. Error Banner
+     5. Balance Display
+     6. Chart Section
+     7. Transaction Form
+     8. Transaction List
+     9. Responsive (< 600px)
+   ============================================================= */
+
+/* ---------------------------------------------------------------
+   1. CSS Custom Properties
+--------------------------------------------------------------- */
+:root {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-primary: #4a6cf7;
+  --color-danger: #e53935;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-border: #e0e4ef;
+  --color-error-bg: #fdecea;
+  --color-error-border: #f5c6c6;
+
+  --font-size-balance: 2rem;
+  --font-size-chart-label: 1rem;
+  --font-size-list-item: 0.875rem;
+  --font-size-body: 1rem;
+
+  --spacing-section: 1.5rem;
+  --radius: 0.5rem;
+}
+
+/* ---------------------------------------------------------------
+   2. Reset / Base
+--------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  font-size: var(--font-size-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------------------
+   3. Layout
+--------------------------------------------------------------- */
+.app-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ---------------------------------------------------------------
+   4. Error Banner
+--------------------------------------------------------------- */
+#error-banner {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-danger);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#error-banner.hidden {
+  display: none;
+}
+
+/* ---------------------------------------------------------------
+   5. Balance Display
+--------------------------------------------------------------- */
+.balance-section {
+  text-align: center;
+}
+
+#balance {
+  font-size: var(--font-size-balance);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 0.25rem;
+}
+
+/* ---------------------------------------------------------------
+   6. Chart Section
+--------------------------------------------------------------- */
+.chart-wrapper {
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+#spending-chart {
+  display: block;
+  max-width: 100%;
+}
+
+#chart-no-data {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-chart-label);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+}
+
+/* ---------------------------------------------------------------
+   7. Transaction Form
+--------------------------------------------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: var(--color-danger);
+  min-height: 1rem;
+}
+
+#transaction-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.625rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+#transaction-form button[type="submit"]:hover,
+#transaction-form button[type="submit"]:focus {
+  opacity: 0.88;
+}
+
+/* ---------------------------------------------------------------
+   8. Transaction List
+--------------------------------------------------------------- */
+.list-section {
+  /* Allow scrolling when list grows */
+}
+
+#transaction-list {
+  list-style: none;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#transaction-list li {
+  font-size: var(--font-size-list-item);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+}
+
+#transaction-list li.empty-state {
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  border: none;
+  background: none;
+}
+
+.tx-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.tx-name {
+  font-weight: 500;
+}
+
+.tx-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.tx-amount {
+  font-weight: 600;
+}
+
+.category-badge {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn-delete {
+  background: none;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.btn-delete:hover,
+.btn-delete:focus {
+  background-color: var(--color-danger);
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------
+   9. Responsive (< 600px)
+--------------------------------------------------------------- */
+@media (max-width: 599px) {
+  /* Prevent any horizontal scrollbar on the page */
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Stack balance → chart → list vertically using flexbox */
+  .app-container {
+    flex-direction: column;
+    padding: 1rem 0.75rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Ensure all sections stay within viewport width */
+  section {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #balance {
+    font-size: 1.5rem;
+  }
+
+  .chart-wrapper {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #spending-chart {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #transaction-list {
+    max-height: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent form inputs from overflowing on narrow screens */
+  .form-group input,
+  .form-group select {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
